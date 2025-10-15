@@ -1,0 +1,259 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>HireBase — Freelance Marketplace (Frontend)</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700;800&display=swap" rel="stylesheet">
+  <style>
+    :root{
+      --bg:#0f1724; 
+      --card:#0b1220; 
+      --muted:#9aa4b2; 
+      --accent:#4f46e5; 
+      --glass: rgba(255,255,255,0.04);
+      --radius:12px; 
+      --glass-2: rgba(255,255,255,0.03);
+    }
+    *{box-sizing:border-box}
+    body{font-family:Inter,system-ui,Segoe UI,Roboto,"Helvetica Neue",Arial; margin:0; background: linear-gradient(180deg,var(--bg) 0%, #071025 100%); color:#e6eef8; -webkit-font-smoothing:antialiased;}
+    .container{max-width:1200px; margin:36px auto; padding:0 20px}
+
+    /* Header / nav */
+    header{display:flex;align-items:center;justify-content:space-between;margin-bottom:28px}
+    .brand{display:flex;gap:12px;align-items:center}
+    .logo{width:48px;height:48px;border-radius:12px;background:linear-gradient(135deg,var(--accent), #06b6d4);display:flex;align-items:center;justify-content:center;font-weight:800;color:white}
+    nav a{color:var(--muted);margin-left:18px;text-decoration:none;font-weight:600}
+
+    /* Hero */
+    .hero{display:grid;grid-template-columns:1fr 420px;gap:28px;align-items:center;margin-bottom:28px}
+    .hero-card{background:linear-gradient(180deg,var(--glass), var(--glass-2));padding:28px;border-radius:18px;box-shadow:0 6px 18px rgba(2,6,23,0.6)}
+    .tag{display:inline-block;padding:6px 10px;border-radius:999px;background:rgba(255,255,255,0.04);color:var(--accent);font-weight:700;margin-bottom:12px}
+    h1{margin:0 0 12px;font-size:30px}
+    p.lead{color:var(--muted);margin:0 0 18px}
+    .search{display:flex;gap:10px}
+    .search input{flex:1;padding:12px 14px;border-radius:10px;border:1px solid rgba(255,255,255,0.04);background:transparent;color:inherit}
+    .btn{background:var(--accent);border:none;padding:12px 16px;border-radius:10px;color:white;font-weight:700;cursor:pointer}
+
+    /* Quick stats */
+    .stats{display:flex;gap:12px;margin-top:16px}
+    .stat{background:rgba(255,255,255,0.02);padding:10px;border-radius:10px;text-align:center;min-width:100px}
+    .stat b{display:block;font-size:18px}
+    .stat span{color:var(--muted);font-size:13px}
+
+    /* Categories */
+    .section{margin-top:18px}
+    .section h2{margin:8px 0 14px}
+    .categories{display:flex;gap:12px;flex-wrap:wrap}
+    .cat{flex:0 0 160px;background:linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01));padding:14px;border-radius:12px;text-align:center;cursor:pointer;border:1px solid transparent}
+    .cat:hover{transform:translateY(-6px);transition:transform 200ms ease;border-color:rgba(255,255,255,0.03)}
+    .cat .emoji{font-size:22px}
+    .cat small{display:block;color:var(--muted);margin-top:8px}
+
+    /* Profiles grid */
+    .grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(240px,1fr));gap:16px;margin-top:16px}
+    .card{background:linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01));padding:16px;border-radius:14px;border:1px solid rgba(255,255,255,0.02)}
+    .profile{display:flex;gap:12px;align-items:center}
+    .avatar{width:56px;height:56px;border-radius:12px;background:linear-gradient(135deg,#fff2,#aaf);display:flex;align-items:center;justify-content:center;font-weight:700;color:#081225}
+    .meta{flex:1}
+    .meta h3{margin:0;font-size:16px}
+    .meta p{margin:4px 0;color:var(--muted);font-size:13px}
+    .skills{margin-top:10px;display:flex;flex-wrap:wrap;gap:8px}
+    .skill{background:rgba(255,255,255,0.03);padding:6px 8px;border-radius:8px;font-size:12px;color:var(--muted)}
+
+    /* Rating */
+    .rating{display:flex;align-items:center;gap:8px;margin-top:8px}
+    .stars{display:flex;gap:4px}
+    .star{width:18px;height:18px;display:inline-block;cursor:pointer;opacity:0.6}
+    .star.active{opacity:1}
+    .rate-count{color:var(--muted);font-size:13px}
+
+    /* Right column mini-cards */
+    .mini{background:linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01));padding:14px;border-radius:12px}
+
+    footer{margin:40px 0 80px;color:var(--muted);text-align:center}
+
+    @media (max-width:980px){
+      .hero{grid-template-columns:1fr}
+      .hero .hero-card{order:2}
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <header>
+      <div class="brand">
+        <div class="logo">HB</div>
+        <div>
+          <div style="font-weight:800">HireBase</div>
+          <div style="font-size:12px;color:var(--muted)">Empower talent - Hire smart</div>
+        </div>
+      </div>
+      <nav>
+        <a href="#">Browse</a>
+        <a href="#">Categories</a>
+        <a href="#">How it works</a>
+        <a href="#">Sign in</a>
+      </nav>
+    </header>
+
+    <section class="hero">
+      <div class="hero-card">
+        <span class="tag">Hire faster - Pay smarter</span>
+        <h1>Find vetted freelancers & experts for any project</h1>
+        <p class="lead">Browse top talent, see ratings and portfolios, and hire with confidence at this trusted website. Stay tuned with TEAM KIT.</p>
+
+        <div class="search">
+          <input id="q" placeholder="Search for designers, developers, writers..." />
+          <button class="btn" onclick="performSearch()">Search</button>
+        </div>
+
+        <div class="stats" aria-hidden>
+          <div class="stat"><b id="stat-jobs">2.7k+</b><span>Jobs posted</span></div>
+          <div class="stat"><b id="stat-freelancers">1.2k+</b><span>Freelancers</span></div>
+          <div class="stat"><b id="stat-hires">8.4k+</b><span>Hires</span></div>
+        </div>
+
+        <div style="margin-top:18px;font-size:13px;color:var(--muted)">Popular:</div>
+        <div style="display:flex;gap:8px;margin-top:8px;flex-wrap:wrap">
+          <button class="skill" onclick="filterCategory('web')">Web Development</button>
+          <button class="skill" onclick="filterCategory('design')">Design</button>
+          <button class="skill" onclick="filterCategory('writing')">Writing</button>
+        </div>
+      </div>
+
+      <aside>
+        <div class="mini">
+          <h3 style="margin:0 0 8px">Featured category</h3>
+          <p style="margin:0;color:var(--muted)">UI/UX Designers — 312 active profiles</p>
+        </div>
+        <div style="height:14px"></div>
+        <div class="mini">
+          <h3 style="margin:0 0 8px">Post a job — free</h3>
+          <p style="margin:0;color:var(--muted)">Get proposals in 24 hours. (Demo)</p>
+          <div style="height:12px"></div>
+          <button class="btn" onclick="alert('This demo is frontend-only — integrate with backend to accept proposals')">Post a job</button>
+        </div>
+      </aside>
+    </section>
+
+    <section class="section">
+      <h2>Categories</h2>
+      <div class="categories" id="categories"></div>
+    </section>
+
+    <section class="section">
+      <h2>Top professionals</h2>
+      <div class="grid" id="profiles"></div>
+    </section>
+
+    <footer>
+      &copy; HireBase — Demo UI - BUILD BY TEAM KIT. Open <strong>hirebase_frontend.html</strong> and presented by MINDMATRIX.
+    </footer>
+  </div>
+
+  <script>
+    /* --- Sample data --- */
+    const CATEGORIES = [
+      {id:'web',name:'Web Development','emoji':'💻','count':420},
+      {id:'design',name:'UI/UX Design','emoji':'🎨','count':312},
+      {id:'writing',name:'Content & Copy','emoji':'✍️','count':220},
+      {id:'marketing',name:'Marketing','emoji':'📣','count':150},
+      {id:'data',name:'Data & AI','emoji':'🤖','count':86},
+      {id:'video',name:'Video & Animation','emoji':'🎬','count':64}
+    ];
+
+    const PROFILES = [
+      {id:1,name:'Sanjay',title:'Senior Frontend Engineer',skills:['React','TypeScript','Tailwind'],imgInitials:'SA',rating:4.8,reviews:52,category:'web',hourly:35},
+      {id:2,name:'Rahul Das',title:'Product Designer',skills:['Figma','Prototyping'],imgInitials:'RD',rating:4.7,reviews:41,category:'design',hourly:30},
+      {id:3,name:'Neha Sinan',title:'Content Strategist',skills:['SEO','Copywriting'],imgInitials:'NS',rating:4.9,reviews:64,category:'writing',hourly:40},
+      {id:4,name:'Akash',title:'Data Scientist',skills:['Python','ML'],imgInitials:'AK',rating:4.6,reviews:22,category:'data',hourly:48},
+      {id:5,name:'Harika',title:'Motion Designer',skills:['After Effects','Animation'],imgInitials:'HA',rating:4.5,reviews:18,category:'video',hourly:28}
+    ];
+
+    /* --- Rendering --- */
+    function renderCategories(){
+      const el = document.getElementById('categories'); el.innerHTML='';
+      CATEGORIES.forEach(c=>{
+        const d = document.createElement('div'); d.className='cat'; d.innerHTML = `<div class=emoji>${c.emoji}</div><div style="font-weight:700;margin-top:8px">${c.name}</div><small>${c.count} talents</small>`;
+        d.onclick = ()=>{ filterCategory(c.id) };
+        el.appendChild(d);
+      })
+    }
+
+    function renderProfiles(list=PROFILES){
+      const el = document.getElementById('profiles'); el.innerHTML='';
+      list.forEach(p=>{
+        const card = document.createElement('div'); card.className='card';
+        card.innerHTML = `
+          <div class=profile>
+            <div class=avatar>${p.imgInitials}</div>
+            <div class=meta>
+              <h3>${p.name}</h3>
+              <p>${p.title} • $${p.hourly}/hr</p>
+              <div class=rating>
+                <div class=stars data-id="${p.id}"></div>
+                <div class=rate-count>${p.rating.toFixed(1)} · ${p.reviews} reviews</div>
+              </div>
+              <div class=skills>${p.skills.map(s=>`<span class=skill>${s}</span>`).join('')}</div>
+            </div>
+          </div>
+        `;
+        el.appendChild(card);
+        renderStars(card.querySelector('.stars'), p.rating, p.id);
+      })
+    }
+
+    /* --- Stars (interactive demo) --- */
+    function renderStars(container, score, id){
+      container.innerHTML = '';
+      const saved = getSavedRating(id) || null;
+      const displayScore = saved ? (saved.avg).toFixed(1) : score.toFixed(1);
+      for(let i=1;i<=5;i++){
+        const s = document.createElement('svg'); s.setAttribute('viewBox','0 0 24 24'); s.className='star'; s.innerHTML = `<path d="M12 .587l3.668 7.431L23.4 9.75l-5.714 5.57L19.335 24 12 19.897 4.665 24l1.649-8.68L.6 9.75l7.732-1.732L12 .587z"/>`;
+        if(i <= Math.round(displayScore)) s.classList.add('active');
+        s.onclick = ()=>{ submitRating(id, i, container) };
+        container.appendChild(s);
+      }
+    }
+
+    function submitRating(profileId, stars, container){
+      // simple localStorage-backed demo of ratings aggregation
+      const key = 'hirebase_ratings_v1';
+      const all = JSON.parse(localStorage.getItem(key) || '{}');
+      const existing = all[profileId] || {count:0,sum:0};
+      existing.count += 1; existing.sum += stars; existing.avg = existing.sum / existing.count;
+      all[profileId]=existing; localStorage.setItem(key, JSON.stringify(all));
+      // update display
+      for(let i=0;i<container.children.length;i++){
+        container.children[i].classList.toggle('active', i < Math.round(existing.avg));
+      }
+      const rc = container.parentElement.querySelector('.rate-count');
+      rc.textContent = `${existing.avg.toFixed(1)} · ${existing.count} votes (demo)`;
+    }
+
+    function getSavedRating(profileId){
+      const key='hirebase_ratings_v1';
+      const all = JSON.parse(localStorage.getItem(key) || '{}');
+      return all[profileId] || null;
+    }
+
+    /* --- Filters & search --- */
+    function filterCategory(id){
+      const filtered = PROFILES.filter(p=>p.category===id);
+      renderProfiles(filtered.length ? filtered : PROFILES);
+    }
+
+    function performSearch(){
+      const q = document.getElementById('q').value.toLowerCase().trim();
+      if(!q) return renderProfiles(PROFILES);
+      const out = PROFILES.filter(p=> (p.name+ ' ' + p.title + ' ' + p.skills.join(' ')).toLowerCase().includes(q));
+      renderProfiles(out);
+    }
+
+    /* --- Init --- */
+    renderCategories(); renderProfiles();
+  </script>
+</body>
+</html>
+
