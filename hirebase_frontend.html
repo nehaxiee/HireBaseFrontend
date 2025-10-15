@@ -22,7 +22,22 @@
     /* Header / nav */
     header{display:flex;align-items:center;justify-content:space-between;margin-bottom:28px}
     .brand{display:flex;gap:12px;align-items:center}
-    .logo{width:48px;height:48px;border-radius:12px;background:linear-gradient(135deg,var(--accent), #06b6d4);display:flex;align-items:center;justify-content:center;font-weight:800;color:white}
+    .logo{
+      width:64px;
+      height:64px;
+      border-radius:12px;
+      background:none;
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      overflow:hidden;
+    }
+    .logo img{
+      width:100%;
+      height:100%;
+      object-fit:contain;
+      border-radius:12px;
+    }
     nav a{color:var(--muted);margin-left:18px;text-decoration:none;font-weight:600}
 
     /* Hero */
@@ -83,7 +98,9 @@
   <div class="container">
     <header>
       <div class="brand">
-        <div class="logo">HB</div>
+        <div class="logo">
+          <img src="logo2.jpg" alt="HireBase Logo">
+        </div>
         <div>
           <div style="font-weight:800">HireBase</div>
           <div style="font-size:12px;color:var(--muted)">Empower talent - Hire smart</div>
@@ -97,6 +114,7 @@
       </nav>
     </header>
 
+    <!-- Hero Section -->
     <section class="hero">
       <div class="hero-card">
         <span class="tag">Hire faster - Pay smarter</span>
@@ -171,7 +189,6 @@
       {id:5,name:'Harika',title:'Motion Designer',skills:['After Effects','Animation'],imgInitials:'HA',rating:4.5,reviews:18,category:'video',hourly:28}
     ];
 
-    /* --- Rendering --- */
     function renderCategories(){
       const el = document.getElementById('categories'); el.innerHTML='';
       CATEGORIES.forEach(c=>{
@@ -204,7 +221,6 @@
       })
     }
 
-    /* --- Stars (interactive demo) --- */
     function renderStars(container, score, id){
       container.innerHTML = '';
       const saved = getSavedRating(id) || null;
@@ -218,13 +234,11 @@
     }
 
     function submitRating(profileId, stars, container){
-      // simple localStorage-backed demo of ratings aggregation
       const key = 'hirebase_ratings_v1';
       const all = JSON.parse(localStorage.getItem(key) || '{}');
       const existing = all[profileId] || {count:0,sum:0};
       existing.count += 1; existing.sum += stars; existing.avg = existing.sum / existing.count;
       all[profileId]=existing; localStorage.setItem(key, JSON.stringify(all));
-      // update display
       for(let i=0;i<container.children.length;i++){
         container.children[i].classList.toggle('active', i < Math.round(existing.avg));
       }
@@ -238,7 +252,6 @@
       return all[profileId] || null;
     }
 
-    /* --- Filters & search --- */
     function filterCategory(id){
       const filtered = PROFILES.filter(p=>p.category===id);
       renderProfiles(filtered.length ? filtered : PROFILES);
@@ -251,7 +264,6 @@
       renderProfiles(out);
     }
 
-    /* --- Init --- */
     renderCategories(); renderProfiles();
   </script>
 </body>
